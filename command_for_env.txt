@@ -1,0 +1,9 @@
+    cd Envs
+    cd project1_env
+    cd Scripts
+    . Scripts/activate
+    activate
+    cd ..
+    . Scripts/activate
+    history
+# do not worry about this commands, it is from my local machine
