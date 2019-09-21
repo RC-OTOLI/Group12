@@ -1,0 +1,89 @@
+/////////////Init////////////////////
+Git initialize
+git init
+
+**Check for status:
+git status
+
+**Add changes files:
+git add [name of file]
+            or "."
+
+*remove changed files:
+git checkout [name of file]
+
+Clone:
+git clone [URL]
+
+
+
+
+///////////Commit/Push//////////////////
+git commit -m "message"
+        if "git commit" -> vim open
+                              exit and save by "esc" + ":wq" enter
+git push origin [name of branch]
+        or "git push" -> may work depending on admin
+
+Check Branches:
+git branch
+
+
+
+
+///////////////Branches///////////////////
+Create Branch:
+git checkout -b [name of branch]
+
+Delete Branch:
+git branch -d [name of branch]
+
+Change Branch:
+git checkout [name of branch]
+
+
+
+
+///////////////Delete////////////////////////
+Delete Origin Branch (web)
+git push --delete [remote name] [branch name]
+
+Delete local branch
+git branch -d [branch name]
+
+Git remove local repository
+rm -rf .git
+
+
+////////////////React Workshop////////////////
+Node JS + NPM
+https://nodejs.org/
+
+npx
+npm install -g npx
+
+Create React Project
+npx create-react-app [Name of Project]
+Starting React
+npm start
+
+//////////////Others/////////////////
+React Guide
+https://reactjs.org
+
+React Bootstrap
+https://react-bootstrap.github.io/getting-started/introduction/
+
+How to HTML
+https://www.w3schools.com/html/
+
+How to CSS
+https://www.w3schools.com/css/
+
+How to Javascript
+https://www.w3schools.com/js/default.asp
+https://www.youtube.com/watch?v=PkZNo7MFNFg
+
+Helps and Questions
+google.com
+
