@@ -1,0 +1,95 @@
+/*Not logged in Home Page*/
+#div1
+{
+  margin-top: 100px;
+  background-color: WHITE !important;
+  height: 500px ;
+  width: 100%;
+}
+#div1.container
+{
+  margin-top: 30px;
+  background-color: WHITE !important;
+}
+
+/* to be implemented*/
+#div3
+{
+    margin-top: 100px;
+    background-color: WHITE !important;
+
+}
+/*Create Account*/
+#div2
+{
+    width: 40%;
+    height: 470px;
+    margin: auto;
+    border: solid #B0C4DE;
+    border-width: thin;
+    border-radius: 8px;
+    margin-top: 100px;
+   
+    
+}
+
+#div2 h4{
+    text-align: right;
+    color: rgba(0,150,255,1);
+}
+
+#div2 img{
+    margin-top: 30px
+}
+#div2 input[type=text]
+{
+  box-shadow: 0 0 5px rgba(0, 255, 192, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(40, 232, 202, 1);
+  
+}
+
+.dropdown
+{
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 20px 50px;
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar-fixed-top
+{
+    min-height: 100px
+}
+.notification::before {
+  display: block;
+  content: "\f0f3";
+  font-family: "FontAwesome";
+  transform-origin: top center;
+}
+/*Profile Nav*/
+#profile.dropdown-content
+{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+#profile.dropdown:hover
+{
+  display: block;
+
+}
