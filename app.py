@@ -8,12 +8,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'I will hiding my secret key for now'
+app.config['SECRET_KEY'] = ''
 # for the secret key you have to install SQLAlchemy for the access and need to create the key for the data base from
 #  sQlite, then using the terminal >>python >> from <your local py> import db >> db.create_all()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./test.db'
+
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'signin'
@@ -25,6 +27,12 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     image_file = db.Column(db.String(15), nullable=False,default='#jpg')
+# db.create_all()
+# admin = User(username='admin', email='admin@example.com', password='asdf', image_file='asfd') 
+# db.session.add(admin) 
+# User.query.all()
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -55,7 +63,7 @@ def signin():
         if user:
             if check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember.data)
-                return redirect(url_for('TransactionHistory'))
+                return redirect(url_for("TransactionHistory"))
 
         return '<h1>Invalid username or password</h1>'
     return render_template('signin.html', form=form)
