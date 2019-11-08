@@ -85,8 +85,11 @@ def signup():
 def transaction_history():
     return render_template('TransactionHistory.html')
 
-
-
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
