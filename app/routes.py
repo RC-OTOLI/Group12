@@ -1,8 +1,8 @@
-from flask import Flask, render_template, url_for, redirect, flash, request
+from flask import Flask, render_template, url_for, redirect, flash, request, json
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
 from app import app, db
-from app.models import User
+from app.models import User, Transaction
 from app.forms import LoginForm, RegisterForm
 from werkzeug.urls import url_parse
 
@@ -60,9 +60,26 @@ def signup():
 
 
 @app.route('/TransactionHistory')
-@login_required
+#@login_required
 def transaction_history():
-    return render_template('TransactionHistory.html')
+    # testTransactions = Transaction.query.filter_by(user_id=current_user.id)
+    # max_budget = User.query.filter_by(user_id=id=current_user.id).first().max_budget
+    budget = User.query.filter_by(id=1).first().max_budget
+    testTransactions = Transaction.query.filter_by(user_id=1)
+
+    # data for the chart
+    ammounts = []
+    labels = []
+    descriptions = []
+    for t in testTransactions:
+        labels.append(t.timestamp)
+        descriptions.append(t.description)
+        sum = 0
+        for x in range(1, len(ammounts)):
+            sum = sum + testTransactions[x-1].ammount
+        ammounts.append(sum)
+
+    return render_template('TransactionHistory.html', data=testTransactions, amts=ammounts, lbls=labels, budget=budget, desc=descriptions)
 
 
 @app.route('/logout')
