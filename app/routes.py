@@ -12,6 +12,12 @@ from werkzeug.urls import url_parse
 def index():
     return render_template('home.html')
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+    
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     form = LoginForm()
@@ -60,12 +66,12 @@ def signup():
 
 
 @app.route('/TransactionHistory')
-#@login_required
+@login_required
 def transaction_history():
-    # testTransactions = Transaction.query.filter_by(user_id=current_user.id)
-    # max_budget = User.query.filter_by(user_id=id=current_user.id).first().max_budget
-    budget = User.query.filter_by(id=1).first().max_budget
-    testTransactions = Transaction.query.filter_by(user_id=1)
+    testTransactions = Transaction.query.filter_by(user_id=current_user.id)
+    budget = User.query.filter_by(id=current_user.id).first().max_budget
+    # testTransactions = Transaction.query.filter_by(user_id=1)
+    # budget = User.query.filter_by(id=1).first().max_budget
 
     # data for the chart
     ammounts = []
@@ -81,9 +87,3 @@ def transaction_history():
 
     return render_template('TransactionHistory.html', data=testTransactions, amts=ammounts, lbls=labels, budget=budget, desc=descriptions)
 
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('home'))

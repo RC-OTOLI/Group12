@@ -31,7 +31,7 @@ class User(UserMixin, db.Model):
         # return '<User {}>'.format(self.username)    
 
         #full representation sans hash
-        return '<User {}, {}, {}>'.format(self.username, self.email, self.max_budget)
+        return '<User {}, {}, {}, {}>'.format(self.id, self.username, self.email, self.max_budget)
 
 # if db is not initialized yet:
 # db.create_all()
