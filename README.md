@@ -3,8 +3,8 @@ use a python IDE to run the run.py file
       or
 use a terminal of your choice and change directories to the Group12 directory and then enter 'python run.py' into the terminal and hit return
 
-for a demo, sign in wtih 
-username: raymond
+for a demo, sign in wtih <br>
+username: raymond <br>
 password: rocker246
 
 # Credits
