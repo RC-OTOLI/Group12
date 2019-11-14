@@ -26,32 +26,29 @@ class User(UserMixin, db.Model):
     def get_max_budget(self):
         return self.max_budget
 
+    #basic representation
     def __repr__(self):
-        #basic representation
-        # return '<User {}>'.format(self.username)    
+        return '\n<id: {}, Username: {}>'.format(self.id, self.username)    
 
-        #full representation sans hash
-        return '<User {}, {}, {}, {}>'.format(self.id, self.username, self.email, self.max_budget)
+    #full representation sans hash
+    def full_detail(self):
+        return '\n<User id: {}, Username: {}, Email: {}, Max budget: {}>'.format(self.id, self.username, self.email, self.max_budget)
 
-# if db is not initialized yet:
-# db.create_all()
-# admin = User(username='admin', email='admin@example.com', password='group12') 
-# db.session.add(admin) 
-# User.query.all()
 
 class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    ammount = db.Column(db.Float(), nullable=False)
+    amount = db.Column(db.Float(), nullable=False)
     description = db.Column(db.String(144))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    # basic representation
     def __repr__(self):
-        # basic representation
-        return '<Transaction {}: {} | {}>'.format(self.user_id, self.ammount, self.description)
+        return '\n<Transaction UID: {} | amt: {} ; {}>'.format(self.user_id, self.ammount, self.description)
 
-        # full representation
-        # return '<{} | {} | {}: {} | {}>'.format(self.user_id, self.id, self.ammount, self.description, self.timestamp)
+    # full representation
+    def full_detail(self):
+        return '\n<Transaction UID: {} | id: {} | amt: {} ; {} at: {} >'.format(self.user_id, self.id, self.ammount, self.description, self.timestamp)
 
 @login_manager.user_loader
 def load_user(user_id):

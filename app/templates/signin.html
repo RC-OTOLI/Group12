@@ -21,14 +21,6 @@ Sign in
         {{ wtf.form_field(form.remember) }}
         <button class="btn btn-sm btn-primary btn-block" type="submit" style="background-color:Orange;">Sign in</button>
       </form>
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
+      
     </div> <!-- /container -->
 {% endblock %}

@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, url_for, redirect, flash, request, json
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bootstrap import Bootstrap
@@ -55,7 +56,7 @@ def signup():
         new_user = User(username=form.username.data, email=form.email.data)
         # store the hash of the user's password
         new_user.set_password(form.password.data)
-    
+        
         db.session.add(new_user)
         db.session.commit()
         
@@ -68,22 +69,37 @@ def signup():
 @app.route('/TransactionHistory')
 @login_required
 def transaction_history():
-    testTransactions = Transaction.query.filter_by(user_id=current_user.id)
+    transactions = Transaction.query.filter_by(user_id=current_user.id)
     budget = User.query.filter_by(id=current_user.id).first().max_budget
-    # testTransactions = Transaction.query.filter_by(user_id=1)
-    # budget = User.query.filter_by(id=1).first().max_budget
 
     # data for the chart
-    ammounts = []
+    amounts = []
     labels = []
     descriptions = []
-    for t in testTransactions:
+    for t in transactions:
         labels.append(t.timestamp)
         descriptions.append(t.description)
         sum = 0
-        for x in range(1, len(ammounts)):
-            sum = sum + testTransactions[x-1].ammount
-        ammounts.append(sum)
+        for x in range(1, len(amounts)):
+            sum = sum + transactions[x-1].amount
+        amounts.append(sum)
 
-    return render_template('TransactionHistory.html', data=testTransactions, amts=ammounts, lbls=labels, budget=budget, desc=descriptions)
+    def is_jsonable(x):
+        try: 
+            json.dumps(x)
+        except:
+            return render_template('TransactionHistory.html', noData=True)
 
+
+    is_jsonable(transactions)
+    is_jsonable(budget)
+    is_jsonable(amounts)
+    is_jsonable(descriptions)
+    is_jsonable(labels)
+    try: 
+        is_jsonable(amounts[0])
+    except:
+        flash('no data')
+        return render_template('TransactionHistory.html', noData=True)
+
+    return render_template('TransactionHistory.html', noData=False, data=transactions, amts=amounts, lbls=labels, budget=budget, desc=descriptions)

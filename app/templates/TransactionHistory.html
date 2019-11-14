@@ -6,24 +6,32 @@
 	<script src="https://rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.js"></script>
 {% endblock scripts %}
 
-<div style="padding-top: 25px; text-align: center">;<h1>Transaction History</h1></div>
+<div style="padding-top: 50px; text-align: center">;<h1>Transaction Statistics</h1></div>
 <!-- <link rel="stylesheet" href= "{{url_for('static',filename = 'main.css')}}"> -->
 <link rel="stylesheet" href="../static/main.css"></link>
+
+{% if noData == true %}
+	<div style="width: auto; height: auto; text-align: center;  padding-top: 20%;">
+	<h1>You have no data!</h1>
+	</div>
+{% else %}
 <canvas id="myChart" style="padding: 0%, 5%, 5%, 0%; height: 85%; width: 80%">
-	<script type='text/javascript'>
+		
+		<!-- should be in JS file; temp fix -->
+		<script type='text/javascript'>
 	
 		/* 
 		 * miniscript to determine color of bars: 
 		 * if the sum of debits/credits exceed set budget, the bar color is red
 		 * if the sum of debits/credits subceed set budget, the bar color is green
 		 */
-		var ammounts = {{ amts }}
+		var amounts = {{ amts }}
 		var barColors = []
 		var borderColors = []
-		for(var i = 0; i < ammounts.length; i++) {
+		for(var i = 0; i < amounts.length; i++) {
 			var barColor
 			var borderColor
-			if(ammounts[i] > {{ budget }}) {
+			if(amounts[i] > {{ budget }}) {
 				barColor = 'rgba(255, 99, 132, 0.6)'
 				borderColor = 'rgba(255, 99, 132, 1)'
 			} else {
@@ -47,7 +55,7 @@
 				labels: {{ lbls|tojson }},
 				datasets: [{
 					label: '$ Spent/Earned',
-					label: [['$ Total'.concat(({{ amts[0]|tojson }}).toString().substring(1))], ],
+					label: [['$ Total'.concat(({{ amts[0]|tojson }}).toString().substring(1))]],
 					data: {{ amts|tojson }},
 					backgroundColor: barColors,
 					borderColor: borderColors,
@@ -168,4 +176,5 @@
 		});
 	</script>
 </canvas>
+{% endif %}
 {% endblock %}

@@ -1,13 +1,52 @@
 {% extends 'layout.html'  %}
 {% block body %}
 <link rel="stylesheet" href="/static/main.css">
-<div id = "div1">
-<center>
-<form action="http://sce.engr.sjsu.edu/" method="post">
-  <!-- I will direct to SCE club link, just for now -->
-  <!-- and it not contain any data from the user input, so no need to worry about it -->
- 
-  <h3>Welcome to My Project</h3>
- 
-</link>
-{% endblock %}
+<div id="div1">
+  <center>
+    <form action="http://sce.engr.sjsu.edu/" method="post">
+      <!-- I will direct to SCE club link, just for now -->
+      <!-- and it not contain any data from the user input, so no need to worry about it -->
+
+      <h3>Welcome to Wallet</h3>
+
+      <div class="slides-container">
+
+        <img class="homeSlides" src="../static/images/wallet.jpg" alt="random" style="width: 100%;">
+        <img class="homeSlides" src="../static/images/tempTransaction.jpg" alt="download" style="width:100%;">
+        <img class="homeSlides" src="../static/images/graphtemp.png" alt="downloaded" style="width: 100%;">
+
+        <!--arrows-->
+        <a class="prev" onclick="slideShow(-1)">&#10094;</a>
+        <a class="next" onclick="slideShow(1)">&#10095;</a>
+
+      </div>
+      <!--<script src = "../templates/slide.js"></script>-->
+      <!--need to be put in js file, isn't applying for me so kept here for further implementation-->
+      <script>
+        var slideIndex = 1;
+        moveSlides(slideIndex);
+
+        function slideShow(n) {
+          moveSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          moveSlides(slideIndex = n);
+        }
+
+        function moveSlides(n) {
+          var slides = document.getElementsByClassName("homeSlides");
+          if (n > slides.length) {
+            slideIndex = 1
+          }
+          if (n < 1) {
+            slideIndex = slides.length
+          }
+          for (var i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          slides[slideIndex - 1].style.display = "block";
+        }
+        </script>
+      </link>
+      {% endblock %}
