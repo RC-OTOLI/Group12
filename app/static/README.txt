@@ -1,6 +1,4 @@
-https://travis-ci.org/RC-OTOLI/Group12.svg?branch=master
-
-additional requirement:
+minimum requires:
 astroid==2.2.5
 atomicwrites==1.3.0
 attrs==19.1.0
@@ -52,13 +50,15 @@ wrapt==1.11.2
 WTForms==2.2.1
 zipp==0.5.2
 
-SQLAlchemy reading requires:
-https://flask.palletsprojects.com/en/1.1.x/patterns/sqlalchemy/#
-sqlite:
+for the database:
+requires:
+sqlite installation 
+https://www.tutorialspoint.com/sqlite/sqlite_installation.htm
+addtional requirement for reading:
 https://sqlite.org/cli.html
 http://www.sqltutorial.org/sql-list-all-tables/
+
+SQLAlchemy learning reading:
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#simple-relationships
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#a-minimal-application
 https://flask-sqlalchemy.palletsprojects.com/en/2.x/
-
-

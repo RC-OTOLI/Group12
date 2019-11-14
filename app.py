@@ -14,6 +14,10 @@ def index():
 def transaction_history():
     return render_template('TransactionHistory.html')
 
+@app.route('/AddTrans')
+
+def Add_Trans():
+    return render_template('AddTrans.html', form = AddForm)
 
 if __name__ == '__main__':
     app.run(debug=True)
