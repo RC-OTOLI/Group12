@@ -1,3 +1,16 @@
+To run the website, either 
+use a python IDE to run the run.py file 
+      or
+use a terminal of your choice and change directories to the Group12 directory and then enter 'python run.py' into the terminal and hit return
+
+# Credits
+
+Wallet includes works distributed under the licenses listed below. The full text for most of the licenses listed below can be found in the LICENSE.txt file accompanying each work. The original copyright notices have been preserved within the respective files and or packages. Please refer to the specific files and/or packages for more detailed information about the authors, copyright notices, and licenses.
+
+| Project                                  | License                                  |
+| ---------------------------------------- | ---------------------------------------- |
+| [Chart.js](https://www.chartjs.org/)     | [MIT](https://github.com/chartjs/Chart.js/blob/master/LICENSE.md) |
+
 https://travis-ci.org/RC-OTOLI/Group12.svg?branch=master
 
 additional requirement:
@@ -51,14 +64,3 @@ Werkzeug==0.15.6
 wrapt==1.11.2
 WTForms==2.2.1
 zipp==0.5.2
-
-SQLAlchemy reading requires:
-https://flask.palletsprojects.com/en/1.1.x/patterns/sqlalchemy/#
-sqlite:
-https://sqlite.org/cli.html
-http://www.sqltutorial.org/sql-list-all-tables/
-https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#simple-relationships
-https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#a-minimal-application
-https://flask-sqlalchemy.palletsprojects.com/en/2.x/
-
-
