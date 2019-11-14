@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_bootstrap import Bootstrap
 from app import app, db
 from app.models import User, Transaction
-from app.forms import LoginForm, RegisterForm, MaxBudgetForm
+from app.forms import LoginForm, RegisterForm, MaxBudgetForm, AddForm
 from werkzeug.urls import url_parse
 
 # app.debug = True
@@ -18,6 +18,11 @@ def index():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/TransactionHistory')
+@login_required
+def transaction_history():
+    return render_template('TransactionHistory.html')
     
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
@@ -66,9 +71,22 @@ def signup():
     return render_template('signup.html', form=form)
 
 
-@app.route('/TransactionHistory', methods=['GET', 'POST'])
+@app.route('/AddTrans', methods = ['GET', 'POST'])
+def addTrans():
+    form = AddForm()
+    if form.validate_on_submit():
+        # user = User.query.filter_by(id=current_user.id).first()
+        user = User.query.filter_by(id=1).first()
+        t = Transaction(amount = form.amount.data, description =  form.description.data, author = user)
+
+        db.session.add(t)
+        db.session.commit()
+        flash(t)
+    return render_template('AddTrans.html', form = form)
+
+@app.route('/TransactionStats', methods=['GET', 'POST'])
 @login_required
-def transaction_history():
+def transaction_stats():
 
     form = MaxBudgetForm()
     user = User.query.filter_by(id=current_user.id).first()
@@ -91,7 +109,7 @@ def transaction_history():
         try: 
             json.dumps(x)
         except:
-            return render_template('TransactionHistory.html', noData=True)
+            return render_template('TransactionStats.html', noData=True)
 
 
     is_jsonable(transactions)
@@ -103,11 +121,11 @@ def transaction_history():
         is_jsonable(amounts[0])
     except:
         flash('no data')
-        return render_template('TransactionHistory.html', noData=True)
+        return render_template('TransactionStats.html', noData=True)
 
     if form.validate_on_submit():
         user.set_max_budget(form.max_budget.data)
         db.session.commit()
-        return redirect(url_for('transaction_history'))
+        return redirect(url_for('transaction_stats'))
 
-    return render_template('TransactionHistory.html', noData=False, data=transactions, amts=amounts, lbls=labels, budget=budget, desc=descriptions, form=form)
+    return render_template('TransactionStats.html', noData=False, data=transactions, amts=amounts, lbls=labels, budget=budget, desc=descriptions, form=form)

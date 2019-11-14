@@ -1,16 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, FloatField
+from wtforms import StringField, IntegerField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, InputRequired, Email, Length, EqualTo
 from app.models import User
 
-class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired()])
-    remember = BooleanField('remember me')
-
 class AddForm(FlaskForm):
-    amount = FloatField('Amount', validators=[InputRequired(), Length(min=0, max=15)])
-    description = StringField('Description', validators=[InputRequired(), Length(min=0, max=80)])
+    amount = IntegerField('username', validators=[InputRequired(), Length(min=0, max=15)])
+    description = StringField('password', validators=[InputRequired(), Length(min=0, max=80)])
+   
+
     
 class RegisterForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
@@ -25,11 +22,4 @@ class RegisterForm(FlaskForm):
     #         raise ValidationError('Username is already taken')
 
     # Emails must be unique
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user is not None:
-            raise ValidationError('That email is already in use')
-
-
-class MaxBudgetForm(FlaskForm):
-    max_budget = FloatField('Set max budget', validators=[InputRequired()])
+   
