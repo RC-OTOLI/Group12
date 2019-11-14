@@ -2,8 +2,8 @@
 {% block body %}
 
 {% block scripts %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
-	<script src="https://rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+<script src="https://rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.js"></script>
 {% endblock scripts %}
 
 <div style="padding-top: 50px; text-align: center">;<h1>Transaction Statistics</h1></div>
@@ -11,10 +11,27 @@
 <link rel="stylesheet" href="../static/main.css"></link>
 
 {% if noData == true %}
-	<div style="width: auto; height: auto; text-align: center;  padding-top: 20%;">
+<div style="width: auto; height: auto; text-align: center;  padding-top: 20%;">
 	<h1>You have no data!</h1>
-	</div>
+</div>
+	
+<!-- chart can't generate if there is no data -->
 {% else %}
+	
+<div class="container">
+	<form method="POST" action="" novalidate>
+		{{ form.hidden_tag() }}
+		<p>
+		{{ form.max_budget.label }}<br>
+		{{ form.max_budget(size = 32) }}
+			
+		{% for error in form.max_budget.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+		</p>
+		<button class="btn btn-sm btn-primary" type="submit" style="background-color:Orange;">Submit</button>
+	</form>
+</div>
 <canvas id="myChart" style="padding: 0%, 5%, 5%, 0%; height: 85%; width: 80%">
 		
 		<!-- should be in JS file; temp fix -->

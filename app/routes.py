@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_bootstrap import Bootstrap
 from app import app, db
 from app.models import User, Transaction
-from app.forms import LoginForm, RegisterForm
+from app.forms import LoginForm, RegisterForm, MaxBudgetForm
 from werkzeug.urls import url_parse
 
 # app.debug = True
@@ -66,11 +66,14 @@ def signup():
     return render_template('signup.html', form=form)
 
 
-@app.route('/TransactionHistory')
+@app.route('/TransactionHistory', methods=['GET', 'POST'])
 @login_required
 def transaction_history():
+
+    form = MaxBudgetForm()
+    user = User.query.filter_by(id=current_user.id).first()
+    budget = user.max_budget
     transactions = Transaction.query.filter_by(user_id=current_user.id)
-    budget = User.query.filter_by(id=current_user.id).first().max_budget
 
     # data for the chart
     amounts = []
@@ -102,4 +105,9 @@ def transaction_history():
         flash('no data')
         return render_template('TransactionHistory.html', noData=True)
 
-    return render_template('TransactionHistory.html', noData=False, data=transactions, amts=amounts, lbls=labels, budget=budget, desc=descriptions)
+    if form.validate_on_submit():
+        user.set_max_budget(form.max_budget.data)
+        db.session.commit()
+        return redirect(url_for('transaction_history'))
+
+    return render_template('TransactionHistory.html', noData=False, data=transactions, amts=amounts, lbls=labels, budget=budget, desc=descriptions, form=form)

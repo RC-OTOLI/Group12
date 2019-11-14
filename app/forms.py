@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, FloatField
 from wtforms.validators import ValidationError, InputRequired, Email, Length, EqualTo
 from app.models import User
 
@@ -26,3 +26,7 @@ class RegisterForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('That email is already in use')
+
+
+class MaxBudgetForm(FlaskForm):
+    max_budget = FloatField('Set max budget', validators=[InputRequired()])
