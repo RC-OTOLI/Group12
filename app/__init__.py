@@ -9,7 +9,7 @@ app.config.from_object(Config)
 
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
-
+# breakpoint();
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'signin'
