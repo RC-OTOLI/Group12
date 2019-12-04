@@ -9,8 +9,10 @@ class LoginForm(FlaskForm):
     remember = BooleanField('remember me')
 
 class AddForm(FlaskForm):
-    amount = FloatField('Amount', validators=[InputRequired()])
-    description = StringField('Description', validators=[InputRequired(), Length(min=0, max=80)])
+    amount = FloatField('amount', validators=[InputRequired()])
+    description = StringField('description', validators=[Length(min=0, max=80)])
+    submit = SubmitField('Submit')
+
     
 class RegisterForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])

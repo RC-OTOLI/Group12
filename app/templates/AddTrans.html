@@ -2,25 +2,22 @@
 {% block body %}
 <link rel="stylesheet" href="{{url_for('static',filename = 'main.css')}}">
     <h1> Add Transaction</h1>
-    <form action= "" method = "POST" novalidate>
+    <form action="" method="POST">
         <p>
             {{form.description.label}} <br>
             {{form.description(size = 10)}}
+            {% for error in form.description.errors %}
+            <span style="color: red;">[{{ error }}</span>
+            {% endfor %}
         </p>
         <p>
             {{form.amount.label}}<br>
             {{form.amount}}
-
+            {% for error in form.amount.errors %}
+            <span style="color: red;">[{{ error }}</span>
+            {% endfor %}
         </p>
         <button class="btn btn-sm btn-primary" type="submit" style="background-color: gray;">Submit</button>
+        <!-- <p>{{ form.submit() }}</p> -->
     </form>
-    {% with messages = get_flashed_messages()%}
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{message}}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
 {% endblock %}
