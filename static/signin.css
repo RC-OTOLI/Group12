@@ -3,7 +3,8 @@ body {
     padding-bottom: 40px;
     background-color: rgb(122, 191, 214);
     margin-top: 50px; */
-    background-size: cover;
+    /* background-size: cover;
+    margin-bottom: 0; */
 }
 
 .form-signin {
@@ -53,8 +54,8 @@ body {
   background-image: url("../static/images/sky.jpg");
 
   /* Control the height of the image */
-  min-height: 625px;
-
+  /* min-height: 625px; */
+  min-height: 568px;
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
@@ -74,7 +75,7 @@ body {
   background-image: url("../static/images/ripple.jpg");
 
   /* Control the height of the image */
-  min-height: 625px;
+  min-height: 568px;
 
   /* Center and scale the image nicely */
   background-position: center;

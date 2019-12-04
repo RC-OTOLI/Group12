@@ -1,10 +1,9 @@
 #div1
 {
-  margin-top: 100px;
+  margin-top: 62px;
   background-color: WHITE !important;
-  height: 400px;
+  height: 505px;
   width: 100%;
-  margin-bottom: 0px;
 }
 
 /* style*/
@@ -109,9 +108,39 @@ img {
   display: block;
 }
 
-/* @media screen and (min-width: 320px) { 
-  audio 
-  { 
-    display:none; 
-  }
-} */
+/* Adding Transaction*/
+#add
+{
+    width: 35%;
+    height: 270px;
+    margin: auto;
+    /* border: solid #B0C4DE;
+    border-width: thin;
+    border-radius: 8px; */
+    margin-top: 130px;
+    
+}
+#add label p
+{
+  
+  margin: auto;
+  
+}
+body {
+  /* The image used */
+  background-image: url("../static/images/sky.jpg");
+
+  /* Control the height of the image */
+  
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.trans
+{
+  margin-top: 50px;
+}
