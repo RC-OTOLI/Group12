@@ -1,29 +1,86 @@
 {% extends "bootstrap/base.html" %}
+{% block html_attribs %} lang="en" {% endblock html_attribs %}
+  {% block head %}
+    {{ super() }}
 
-<head>
-  <!-- check bootstrapcdn.com for CSS section -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block styles %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/main.css">
+    {% endblock styles %}
 
-  {% block title %}
-  homepage
-  {% endblock title %}
-
-  {% block styles %}
-  <link rel="stylesheet" href=" https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  {% endblock styles %}
-  
-</head>
-
-<body>
-  {% include '_navbar.html' %}
-  
-  {% block body %}
-    <!-- empty -->
-  {% endblock %}
+    {% block metas %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% endblock metas %}
     
-  <script type="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-  </script>
-</body>
-</html>
+  {% endblock head %}
+
+  {% block navbar %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <!-- <a class="navbar-brand" href="{{ url_for('index') }}">Wallet</a> -->
+      <audio id="myAudio" loop>
+          <source src="../static/images/In the Winter.mp3">
+      </audio>
+      <a class="navbar-brand" href="#" id="play"> Wallet</a>
+      <a class="navbar" href="#" id="pause"></a>
+      <!-- defenitely a mute -->
+      <script>
+          var x = document.getElementById("myAudio");
+          function playAudio() {
+              x.play();
+          }
+          function pauseAudio() {
+              x.pause();
+          }
+          document.getElementById("play").addEventListener("click", myFunctionPlay);
+          function myFunctionPlay() {
+              playAudio();
+          }
+          document.getElementById("pause").addEventListener("click", myFunctionPause);
+          function myFunctionPause() {
+              pauseAudio();
+          }
+      </script>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" 
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">  
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a></li>
+          {% if current_user.is_anonymous %}
+          <li class="nav-item"><a class="nav-link" href="signin">Sign In</a></li>
+          <li class="nav-item"><a class="nav-link " href="signup">Sign up</a></li>
+          {% else %}
+        </ul>
+        <!-- <iframe src="https://www.youtube.com/embed/Z7rmRFcogsE?start=0&end=34&autoplay=1" width="50" height="50" loop autoplay frameborder="0"></iframe> -->
+        
+        <form class="form-inline my-2 my-lg-0">
+          <div id="profile" class="dropdown">
+            <img src="../static/images/imposter.jpg" alt="profile" style="border-radius: 50%; width: 40px; height: 40px; margin-right: 20px;">
+            <div class="dropdown-content">
+              <a href="{{ url_for('transaction_history') }}">View Transaction</a>
+              <a href="{{ url_for('transaction_stats') }} ">Statistics</a>
+              <a href="{{ url_for('logout') }}">Log out </a>
+              <a href="{{ url_for('delete_account') }}">Delete account </a>
+            </div>
+          </div>
+        </form>
+        
+        {% endif %}
+      </div>
+    </nav>
+  {% endblock navbar %}
+  
+  
+  {% block content %}
+  <!-- empty -->
+  {% endblock content %}
+    
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{% endblock scripts %}

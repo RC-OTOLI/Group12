@@ -1,16 +1,17 @@
 #div1
 {
-  margin-top: 100px;
+  margin-top: 62px;
   background-color: WHITE !important;
-  height: 1000px ;
+  height: 505px;
   width: 100%;
 }
 
 /* style*/
 img {
   vertical-align: middle;
-  height: 472px;
-  width: 927px;
+  height: 370px;
+  width: 400px;
+ 
 }
 
 /* Slideshow*/
@@ -47,7 +48,7 @@ img {
 }
 
 .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.6);
 }
 
 /*Nav bar for profile*/
@@ -80,6 +81,7 @@ img {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  right: 0;
 }
 
 .dropdown:hover {
@@ -95,11 +97,51 @@ img {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+} 
+.profile
+{
   right: 0;
 }
 
 #profile.dropdown:hover
 {
   display: block;
+}
 
+/* Adding Transaction*/
+#add
+{
+    width: 35%;
+    height: 270px;
+    margin: auto;
+    /* border: solid #B0C4DE;
+    border-width: thin;
+    border-radius: 8px; */
+    margin-top: 130px;
+    
+}
+#add label p
+{
+  
+  margin: auto;
+  
+}
+body {
+  /* The image used */
+  background-image: url("../static/images/sky.jpg");
+  background-attachment: fixed;
+
+  /* Control the height of the image */
+  
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.trans
+{
+  margin-top: 50px;
 }

@@ -1,42 +1,44 @@
 {% extends 'layout.html'  %}
-{% block body %}
 
+{% block title %}
+Wallet - Transaction Graph
+{% endblock title %}
+
+{% block content %}
 {% block scripts %}
+{{ super() }}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 <script src="https://rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.js"></script>
 {% endblock scripts %}
 
-<div style="padding-top: 50px; text-align: center"><h1>Transaction Statistics</h1></div>
-<!-- <link rel="stylesheet" href= "{{url_for('static',filename = 'main.css')}}"> -->
-<link rel="stylesheet" href="../static/main.css"></link>
+	<div style="padding-top: 50px; text-align: center">
+		<h1>Transaction Graph</h1>
+	</div>
 
-{% if noData == true %}
-<div style="width: auto; height: auto; text-align: center;  padding-top: 20%;">
-	<h1>You have no data!</h1>
-</div>
+	{% if noData == true %}
+	<div style="width: auto; height: auto; text-align: center;  padding-top: 20%; background-color: rgba(87, 176, 211, 0.8);">
+		<h1>You have no data!</h1>
+	</div>
+	<!-- chart can't generate if there is no data -->
+	{% else %}
 	
-<!-- chart can't generate if there is no data -->
-{% else %}
-	
-<div class="container">
-	<form method="POST" action="" novalidate>
-		{{ form.hidden_tag() }}
-		<p>
-		{{ form.max_budget.label }}<br>
-		{{ form.max_budget(size = 32) }}
+	<div class="container" style="padding-bottom: 10px;">
+		<form method="POST" action="" novalidate>
+			{{ form.hidden_tag() }}
+			{{ form.max_budget.label }}<br>
+			{{ form.max_budget(size = 32) }}
 			
-		{% for error in form.max_budget.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-		</p>
-		<button class="btn btn-sm btn-primary" type="submit" style="background-color:Orange;">Submit</button>
-	</form>
-</div>
-<canvas id="myChart" style="padding: 0%, 5%, 5%, 0%; height: 85%; width: 80%">
-		
-		<!-- should be in JS file; temp fix -->
-		<script type='text/javascript'>
-	
+			{% for error in form.max_budget.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+			<button class="btn btn-sm btn-primary" type="submit" style="background-color:grey;">Submit</button>
+		</form>
+	</div>
+
+<div class="container" style="background-image: linear-gradient(-45deg, rgba(77, 151, 181, 0.8), rgba(130, 181, 201, 0.6), rgba(211, 211, 211, 0.4)); padding: 10px;">
+<canvas id="myChart">
+	<!-- should be in JS file; temp fix -->
+	<script type='text/javascript'>
 		/* 
 		 * miniscript to determine color of bars: 
 		 * if the sum of debits/credits exceed set budget, the bar color is red
@@ -61,8 +63,8 @@
 
 		//Ensure all datapoints are in view
 		var maxVal = Math.max({{ budget|tojson }}*1.2, Math.max(...{{ amts|tojson }})*1.2)
-		var minVal = Math.min({{ budget|tojson }}*0.8, Math.min(...{{ amts|tojson }})*0.8)
-
+		var minVal = Math.min(0, Math.min({{ budget|tojson }}*0.8, Math.min(...{{ amts|tojson }})*0.8))
+		
 
 		//Chart created using Chart.js ver2.8.0 and chartjs-plugin-annotation
 		const context = document.getElementById('myChart').getContext('2d');
@@ -72,7 +74,7 @@
 				labels: {{ lbls|tojson }},
 				datasets: [{
 					label: '$ Spent/Earned',
-					label: [['$ Total'.concat(({{ amts[0]|tojson }}).toString().substring(1))]],
+					label: [['$ Total'.concat(({{ amts[0]|tojson }}).toString().substring(3))]],
 					data: {{ amts|tojson }},
 					backgroundColor: barColors,
 					borderColor: borderColors,
@@ -87,14 +89,16 @@
 				scales: {
 					yAxes: [{
 						ticks: {
-							beginAtZero: false,
+							fontColor: "black",
+							beginAtZero: true,
 							max: maxVal,
-							min: minVal,
+							min: minVal
 						}
 					}],
 					xAxes: [{
 						ticks: {
-							beginAtZero: false,
+							fontColor: "black",
+							beginAtZero: true,
 							minRotation: 90,
 							maxRatation: 90,
 						}
@@ -109,33 +113,33 @@
 						borderColor: 'red',
 						borderWidth: 4,
 						label: {
-						enabled: true,
-						content: 'Budget limit: ${{budget}}'
+							enabled: true,
+							content: 'Budget limit: ${{budget}}'
 						}
 					}]
 				},
 				// tooltips: {
 				// 	// Disable the on-canvas tooltip
 				// 	enabled: false,
-
+				
 				// 	custom: function(tooltipModel) {
 				// 		// Tooltip Element
 				// 		var tooltipEl = document.getElementById('chartjs-tooltip');
 
 				// 		// Create element on first render
 				// 		if (!tooltipEl) {
-				// 			tooltipEl = document.createElement('div');
-				// 			tooltipEl.id = 'chartjs-tooltip';
-				// 			tooltipEl.innerHTML = '<table></table>';
-				// 			document.body.appendChild(tooltipEl);
+					// 			tooltipEl = document.createElement('div');
+					// 			tooltipEl.id = 'chartjs-tooltip';
+					// 			tooltipEl.innerHTML = '<table></table>';
+					// 			document.body.appendChild(tooltipEl);
+					// 		}
+					
+					// 		// Hide if no tooltip
+					// 		if (tooltipModel.opacity === 0) {
+						// 			tooltipEl.style.opacity = 0;
+						// 			return;
 				// 		}
-
-				// 		// Hide if no tooltip
-				// 		if (tooltipModel.opacity === 0) {
-				// 			tooltipEl.style.opacity = 0;
-				// 			return;
-				// 		}
-
+				
 				// 		// Set caret Position
 				// 		tooltipEl.classList.remove('above', 'below', 'no-transform');
 				// 		if (tooltipModel.yAlign) {
@@ -143,40 +147,40 @@
 				// 		} else {
 				// 			tooltipEl.classList.add('no-transform');
 				// 		}
-
+				
 				// 		function getBody(bodyItem) {
-				// 			return bodyItem.lines;
-				// 		}
-
+					// 			return bodyItem.lines;
+					// 		}
+					
 				// 		// Set Text
 				// 		if (tooltipModel.body) {
 				// 			var titleLines = tooltipModel.title || [];
 				// 			var bodyLines = tooltipModel.body.map(getBody);
-
+				
 				// 			var innerHtml = '<thead>';
-
-				// 			titleLines.forEach(function(title) {
+					
+					// 			titleLines.forEach(function(title) {
 				// 				innerHtml += '<tr><th>' + title + '</th></tr>';
 				// 			});
 				// 			innerHtml += '</thead><tbody>';
-
-				// 			bodyLines.forEach(function(body, i) {
-				// 				var colors = tooltipModel.labelColors[i];
-				// 				var style = 'background:' + colors.backgroundColor;
+					
+					// 			bodyLines.forEach(function(body, i) {
+						// 				var colors = tooltipModel.labelColors[i];
+						// 				var style = 'background:' + colors.backgroundColor;
 				// 				style += '; border-color:' + colors.borderColor;
 				// 				style += '; border-width: 2px';
 				// 				var span = '<span style="' + style + '"></span>';
 				// 				innerHtml += '<tr><td>' + span + body + '</td></tr>';
 				// 			});
 				// 			innerHtml += '</tbody>';
-
+				
 				// 			var tableRoot = tooltipEl.querySelector('table');
 				// 			tableRoot.innerHTML = innerHtml;
 				// 		}
-
+				
 				// 		// `this` will be the overall tooltip
 				// 		var position = this._chart.canvas.getBoundingClientRect();
-
+				
 				// 		// Display, position, and set styles for font
 				// 		tooltipEl.style.opacity = 1;
 				// 		tooltipEl.style.position = 'absolute';
@@ -193,6 +197,7 @@
 		});
 	</script>
 </canvas>
+</div>
 {% endif %}
 
-{% endblock %}
+{% endblock content %}

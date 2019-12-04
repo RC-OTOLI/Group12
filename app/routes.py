@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 from flask_bootstrap import Bootstrap
 from app import app, db
 from app.models import User, Transaction
-from app.forms import LoginForm, RegisterForm, MaxBudgetForm, AddForm
+from app.forms import LoginForm, RegisterForm, MaxBudgetForm, AddForm, DeleteForm
 from werkzeug.urls import url_parse
 
 
@@ -93,8 +93,7 @@ def add_trans():
     form = AddForm()
     user = User.query.filter_by(id=current_user.id).first()
     
-    if form.is_submitted():
-        form.validate()
+    if form.validate_on_submit():
         t = Transaction(amount=form.amount.data, description=form.description.data, author=user)
 
         db.session.add(t)
@@ -150,38 +149,48 @@ def transaction_stats():
     return render_template('TransactionStats.html', noData=False, amts=amounts, lbls=labels, budget=budget, form=form)
 
 
-@app.route('/TransactionStatsDisc')
+@app.route('/DeleteTest', methods=['GET', 'POST'])
 @login_required
-def transaction_stats_disc():
+def delete_test():
+    form = DeleteForm()
+    if form.validate_on_submit():
+        print(form.fields.data)
+    else:
+        print(form.errors)
+    return render_template('DeleteTest.html', form=form)
 
-    transactions = Transaction.query.filter_by(user_id=current_user.id)
-    # print(len(transactions))
-    # data for the chart
-    amounts = []
-    labels = []
-    descriptions = []
-    for t in transactions:
-        labels.append(t.timestamp)
-        descriptions.append(t.description)
-        amounts.append(t.amount)
-        print(t.amount)
+# @app.route('/TransactionStatsDisc')
+# @login_required
+# def transaction_stats_disc():
 
-
-    def is_jsonable(x):
-        try: 
-            json.dumps(x)
-        except:
-            return render_template('TransactionStatsDisc.html', noData=True)
-
-
-    is_jsonable(amounts)
-    is_jsonable(descriptions)
-    is_jsonable(labels)
-    try: 
-        is_jsonable(amounts[0])
-    except:
-        flash('no data')
-        return render_template('TransactionStatsDisc.html', noData=True)
+#     transactions = Transaction.query.filter_by(user_id=current_user.id)
+#     # print(len(transactions))
+#     # data for the chart
+#     amounts = []
+#     labels = []
+#     descriptions = []
+#     for t in transactions:
+#         labels.append(t.timestamp)
+#         descriptions.append(t.description)
+#         amounts.append(t.amount)
+#         print(t.amount)
 
 
-    return render_template('TransactionStatsDisc.html', noData=False, amts=amounts, lbls=labels, desc=descriptions)
+#     def is_jsonable(x):
+#         try: 
+#             json.dumps(x)
+#         except:
+#             return render_template('TransactionStatsDisc.html', noData=True)
+
+
+#     is_jsonable(amounts)
+#     is_jsonable(descriptions)
+#     is_jsonable(labels)
+#     try: 
+#         is_jsonable(amounts[0])
+#     except:
+#         flash('no data')
+#         return render_template('TransactionStatsDisc.html', noData=True)
+
+
+#     return render_template('TransactionStatsDisc.html', noData=False, amts=amounts, lbls=labels, desc=descriptions)

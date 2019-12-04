@@ -1,28 +1,18 @@
 {% extends 'layout.html'  %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-{% block styles %}
-{{ super() }}
-<link rel="stylesheet" href="{{url_for('static',filename = 'main.css')}}">
-{% endblock styles %}
+{% block title %}
+Add Transaction
+{% endblock title %}
 
-{% block body %}
-    <h1> Add Transaction</h1>
+{% block content %}
+<div style="padding-top: 50px; text-align: center"><h1>Add Transaction</h1></div>
+<div id="#Add" class="container">
     <form action="" method="POST">
-        <p>
-            {{form.description.label}} <br>
-            {{form.description(size = 10)}}
-            {% for error in form.description.errors %}
-            <span style="color: red;">[{{ error }}</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{form.amount.label}}<br>
-            {{form.amount}}
-            {% for error in form.amount.errors %}
-            <span style="color: red;">[{{ error }}</span>
-            {% endfor %}
-        </p>
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.description) }}
+        {{ wtf.form_field(form.amount) }}
         <button class="btn btn-sm btn-primary" type="submit" style="background-color: gray;">Submit</button>
-        <!-- <p>{{ form.submit() }}</p> -->
     </form>
-{% endblock body %}
+</div>
+{% endblock content %}

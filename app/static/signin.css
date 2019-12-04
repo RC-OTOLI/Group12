@@ -1,14 +1,17 @@
 body {
-    padding-top: 40px;
+    /* padding-top: 40px;
     padding-bottom: 40px;
     background-color: rgb(122, 191, 214);
-    margin-top: 50px;
+    margin-top: 50px; */
+    /* background-size: cover;
+    margin-bottom: 0; */
 }
 
 .form-signin {
   max-width: 500px;
   padding: 30px;
   margin: auto;
+ 
 }
 
 .form-signin .form-signin-heading,
@@ -46,3 +49,37 @@ body {
   border-top-right-radius: 0;
 }
   
+.image {
+  /* The image used */
+  background-image: url("../static/images/sky.jpg");
+
+  /* Control the height of the image */
+  /* min-height: 625px; */
+  min-height: 568px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.back-img {
+  /* The image used */
+  background-image: url("../static/images/ripple.jpg");
+
+  /* Control the height of the image */
+  min-height: 568px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
