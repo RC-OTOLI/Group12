@@ -44,11 +44,11 @@ class Transaction(db.Model):
 
     # basic representation
     def __repr__(self):
-        return '\n<Transaction UID: {} | amt: {} ; {}>'.format(self.user_id, self.ammount, self.description)
+        return '\n<Transaction UID: {} | amt: {} ; {}>'.format(self.user_id, self.amount, self.description)
 
     # full representation
     def full_detail(self):
-        return '\n<Transaction UID: {} | id: {} | amt: {} ; {} at: {} >'.format(self.user_id, self.id, self.ammount, self.description, self.timestamp)
+        return '\n<Transaction UID: {} | id: {} | amt: {} ; {} at: {} >'.format(self.user_id, self.id, self.amount, self.description, self.timestamp)
 
 @login_manager.user_loader
 def load_user(user_id):

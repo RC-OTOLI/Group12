@@ -13,17 +13,29 @@ from werkzeug.urls import url_parse
 def index():
     return render_template('home.html')
 
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+@app.route('/deleteAccount')
+@login_required
+def delete_account():
+    user = User.query.filter_by(id=current_user.id).first()
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
 @app.route('/TransactionHistory')
 @login_required
 def transaction_history():
     return render_template('TransactionHistory.html')
-    
+
+
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     form = LoginForm()
@@ -49,12 +61,12 @@ def signin():
 
     return render_template('signin.html', form=form)
 
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    # IMPORTANT: not working for some reason?
     # already registerd users cannot register again
-    # if current_user.is_authenticated:
-    #     return redirect(url_for('home'))
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
 
     form = RegisterForm()
     if form.validate_on_submit():
@@ -72,17 +84,19 @@ def signup():
 
 
 @app.route('/AddTrans', methods = ['GET', 'POST'])
-def addTrans():
+@login_required
+def add_trans():
     form = AddForm()
+    user = User.query.filter_by(id=current_user.id).first()
+    
     if form.validate_on_submit():
-        # user = User.query.filter_by(id=current_user.id).first()
-        user = User.query.filter_by(id=1).first()
         t = Transaction(amount = form.amount.data, description =  form.description.data, author = user)
 
         db.session.add(t)
         db.session.commit()
         flash(t)
     return render_template('AddTrans.html', form = form)
+
 
 @app.route('/TransactionStats', methods=['GET', 'POST'])
 @login_required

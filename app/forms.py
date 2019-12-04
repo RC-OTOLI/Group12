@@ -9,7 +9,7 @@ class LoginForm(FlaskForm):
     remember = BooleanField('remember me')
 
 class AddForm(FlaskForm):
-    amount = FloatField('Amount', validators=[InputRequired(), Length(min=0, max=15)])
+    amount = FloatField('Amount', validators=[InputRequired()])
     description = StringField('Description', validators=[InputRequired(), Length(min=0, max=80)])
     
 class RegisterForm(FlaskForm):
@@ -19,10 +19,10 @@ class RegisterForm(FlaskForm):
     password2 = PasswordField('confirm password', validators=[InputRequired(), EqualTo('password', message="passwords must match")])
 
     # Uncomment to restrict duplicate usernames
-    # def validate_username(self, username):
-    #     user = User.query.filter_by(username=username.data).first()
-    #     if user is not None:
-    #         raise ValidationError('Username is already taken')
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Username is already taken')
 
     # Emails must be unique
     def validate_email(self, email):
