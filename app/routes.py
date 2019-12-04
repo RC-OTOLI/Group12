@@ -7,6 +7,7 @@ from app.models import User, Transaction
 from app.forms import LoginForm, RegisterForm, MaxBudgetForm, AddForm
 from werkzeug.urls import url_parse
 
+
 # app.debug = True
 @app.route('/')
 @app.route('/home')
@@ -25,6 +26,9 @@ def logout():
 @login_required
 def delete_account():
     user = User.query.filter_by(id=current_user.id).first()
+    transactions = Transaction.query.filter_by(user_id=current_user.id)
+    for t in transactions:
+        db.session.delete(t)
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for('index'))
@@ -89,18 +93,14 @@ def add_trans():
     form = AddForm()
     user = User.query.filter_by(id=current_user.id).first()
     
-    # if form.validate_on_submit():
     if form.is_submitted():
         form.validate()
         t = Transaction(amount=form.amount.data, description=form.description.data, author=user)
-        # flash("yo, wtf?")
 
         db.session.add(t)
         db.session.commit()
-        flash(form.amount.data)
-        flash(form.description.data)
-        # flash("nothing yet?")
-        # return redirect(url_for('transaction_stats'))
+
+        return redirect(url_for('transaction_history'))
 
     return render_template('AddTrans.html', form=form)
 

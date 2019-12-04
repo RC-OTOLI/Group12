@@ -1,4 +1,4 @@
-{% extends "bootstrap/base.html" %}
+{% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
@@ -10,7 +10,7 @@ Sign in
 <link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
 {% endblock %}
 
-{% block content %}
+{% block body %}
     <div class="container">
 
       <form class="form-signin" method="POST" action="/signin">
@@ -18,8 +18,15 @@ Sign in
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.username) }}
         {{ wtf.form_field(form.password) }}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <p class="help-block" style="color: #a94442;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
         {{ wtf.form_field(form.remember) }}
         <button class="btn btn-sm btn-primary btn-block" type="submit" style="background-color:Orange;">Sign in</button>
       </form>
     </div> <!-- /container -->
-{% endblock %}
+{% endblock body %}

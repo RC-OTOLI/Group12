@@ -2,11 +2,19 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, FloatField
 from wtforms.validators import ValidationError, InputRequired, Email, Length, EqualTo
 from app.models import User
+from app import db
+
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
+    username = StringField('username', validators=[InputRequired()])
     password = PasswordField('password', validators=[InputRequired()])
     remember = BooleanField('remember me')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is None:
+            raise ValidationError("Could not find a user with that name!")
+
 
 class AddForm(FlaskForm):
     amount = FloatField('amount', validators=[InputRequired()])
