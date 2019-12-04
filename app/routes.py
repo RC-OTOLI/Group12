@@ -124,7 +124,7 @@ def transaction_stats():
         return render_template('TransactionStats.html', noData=True)
 
     if form.validate_on_submit():
-        user.set_max_budget(form.max_budget.data)
+        user.set_max_budget(name=form.max_budget.data)
         db.session.commit()
         return redirect(url_for('transaction_stats'))
 
