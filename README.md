@@ -4,8 +4,8 @@ use a python IDE to run the run.py file
 use a terminal of your choice and change directories to the Group12 directory and then enter 'python run.py' into the terminal and hit return
 
 for a demo, sign in wtih <br>
-username: raymond <br>
-password: rocker246
+username: admin <br>
+password: admin
 
 # Credits
 
