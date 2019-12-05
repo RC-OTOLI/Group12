@@ -57,4 +57,4 @@ class RegisterForm(FlaskForm):
 
 
 class MaxBudgetForm(FlaskForm):
-    max_budget = FloatField('Set max budget', validators=[InputRequired()])
+    max_budget = FloatField('Set max budget: ', validators=[InputRequired()])

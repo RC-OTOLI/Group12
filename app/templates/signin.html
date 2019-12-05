@@ -21,6 +21,9 @@ Wallet - Sign in
       {{ form.hidden_tag() }}
       {{ wtf.form_field(form.username) }}
       {{ wtf.form_field(form.password) }}
+      {% for error in form.password.errors %}
+      <span style="color: black;">{{ error }}</span>                
+      {% endfor %}
       {{ wtf.form_field(form.remember) }}
       <button class="btn btn-sm btn-primary btn-block" type="submit" style="background-color:blue;">Sign in</button>
     </form>

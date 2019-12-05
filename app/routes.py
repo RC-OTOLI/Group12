@@ -94,7 +94,10 @@ def add_trans():
     user = User.query.filter_by(id=current_user.id).first()
     
     if form.validate_on_submit():
-        t = Transaction(amount=form.amount.data, description=form.description.data, author=user)
+        # handle floating point errors
+        amt = form.amount.data
+        amt = round(amt*100)/100
+        t = Transaction(amount=amt, description=form.description.data, author=user)
 
         db.session.add(t)
         db.session.commit()
@@ -111,6 +114,7 @@ def transaction_stats():
     form = MaxBudgetForm()
     user = User.query.filter_by(id=current_user.id).first()
     budget = user.max_budget
+    form.max_budget.data = budget
     transactions = Transaction.query.filter_by(user_id=current_user.id)
 
     # data for the chart
