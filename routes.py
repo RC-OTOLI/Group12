@@ -75,7 +75,7 @@ def transaction_history():
     
    
 
-    return render_template('TransactionHistory.html',len = len(amounts), amts=amounts, lbls=labels, budget=budget, description = description)
+    return render_template('TransactionHistory.html',len = len(amounts), amts=amounts, noData= noData, lbls=labels, budget=budget, description = description)
 
 
 
