@@ -7,7 +7,13 @@ from app.models import User, Transaction
 from app.forms import LoginForm, RegisterForm, MaxBudgetForm, AddForm, DeleteForm
 from werkzeug.urls import url_parse
 
+"""
+routes.py
+====================================
+Links HTML routes 
+"""
 
+"""Home HTML routing"""
 # app.debug = True
 @app.route('/')
 @app.route('/home')
@@ -15,13 +21,14 @@ def index():
     return render_template('home.html')
 
 
+"""Log out User"""
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
+"""Deletes User Account"""
 @app.route('/deleteAccount')
 @login_required
 def delete_account():
@@ -33,13 +40,16 @@ def delete_account():
     db.session.commit()
     return redirect(url_for('index'))
 
-
+"""Transation HTML"""
 @app.route('/TransactionHistory')
 @login_required
+
 def transaction_history():
-    return render_template('TransactionHistory.html')
+    user = User.query.filter_by(id=current_user.id).first()
+    budget = user.max_budget
+    return render_template('TransactionHistory.html',budget=budget)
 
-
+"""Login for User HTML"""
 @app.route('/signin', methods=['GET', 'POST'])
 def signin():
     form = LoginForm()
@@ -65,7 +75,7 @@ def signin():
 
     return render_template('signin.html', form=form)
 
-
+"""Sign UP HTML for User account"""
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     # already registerd users cannot register again
@@ -86,7 +96,7 @@ def signup():
 
     return render_template('signup.html', form=form)
 
-
+"""Add Event to Transaction HTML"""
 @app.route('/AddTrans', methods = ['GET', 'POST'])
 @login_required
 def add_trans():
@@ -106,7 +116,7 @@ def add_trans():
 
     return render_template('AddTrans.html', form=form)
 
-
+"""Statistical Graph"""
 @app.route('/TransactionStats', methods=['GET', 'POST'])
 @login_required
 def transaction_stats():
@@ -114,7 +124,6 @@ def transaction_stats():
     form = MaxBudgetForm()
     user = User.query.filter_by(id=current_user.id).first()
     budget = user.max_budget
-    form.max_budget.data = budget
     transactions = Transaction.query.filter_by(user_id=current_user.id)
 
     # data for the chart
@@ -152,7 +161,7 @@ def transaction_stats():
 
     return render_template('TransactionStats.html', noData=False, amts=amounts, lbls=labels, budget=budget, form=form)
 
-
+"""Delete Event to Transaction HTML"""
 @app.route('/DeleteTest', methods=['GET', 'POST'])
 @login_required
 def delete_test():
@@ -162,6 +171,11 @@ def delete_test():
     else:
         print(form.errors)
     return render_template('DeleteTest.html', form=form)
+
+"""About the application"""
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 # @app.route('/TransactionStatsDisc')
 # @login_required

@@ -4,6 +4,11 @@ from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
+"""
+_init_.py
+====================================
+Directory that executes defined field
+"""
 app = Flask(__name__)
 app.config.from_object(Config)
 

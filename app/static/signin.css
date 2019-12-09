@@ -49,19 +49,19 @@ body {
   border-top-right-radius: 0;
 }
   
-.image {
+/* .image { */
   /* The image used */
-  background-image: url("../static/images/sky.jpg");
+  /* background-image: url("../static/images/sky.jpg"); */
 
   /* Control the height of the image */
   /* min-height: 625px; */
-  min-height: 568px;
+  /* min-height: 568px; */
   /* Center and scale the image nicely */
-  background-position: center;
+  /* background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-}
+} */
 
 
 .container {
@@ -70,16 +70,7 @@ body {
   padding: 20px;
 }
 
-.back-img {
-  /* The image used */
-  background-image: url("../static/images/ripple.jpg");
-
-  /* Control the height of the image */
-  min-height: 568px;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+.back-img 
+{ 
+  margin-top: -22px;
 }

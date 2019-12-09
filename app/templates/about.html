@@ -1,0 +1,57 @@
+{% extends 'layout.html'  %}
+    {% block title %}
+      Wallet - Home
+    {% endblock title %}
+
+{% block content %}
+<div id="div2">
+  
+  <h3>About Wallet</h3>
+  <center>
+  <div class="slides-container">
+
+    <img class="homeSlides" src="../static/images/wallet.jpg" alt="random" style="width: 100%;">
+    <img class="homeSlides" src="../static/images/tempTransaction.jpg" alt="download" style="width:100%;">
+    <img class="homeSlides" src="../static/images/graphtemp.png" alt="downloaded" style="width: 100%;">
+
+    <!--arrows-->
+    <a class="prev" onclick="slideShow(-1)">&#10094;</a>
+    <a class="next" onclick="slideShow(1)">&#10095;</a>
+    </center>
+    <p>Wallet is a Budgeting Application that allows you to self manage your spendings. By adding your daily 
+        spending and setting your desired milestone, you are able to see how well you are using your money 
+        through the month, year, and day.
+    </p>
+  </div>
+  
+  <!--<script src = "../templates/slide.js"></script>-->
+  <!--need to be put in js file, isn't applying for me so kept here for further implementation-->
+  <script>
+    var slideIndex = 1;
+    moveSlides(slideIndex);
+
+    function slideShow(n) {
+      moveSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      moveSlides(slideIndex = n);
+    }
+
+    function moveSlides(n) {
+      var slides = document.getElementsByClassName("homeSlides");
+      if (n > slides.length) {
+        slideIndex = 1
+      }
+      if (n < 1) {
+        slideIndex = slides.length
+      }
+      for (var i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex - 1].style.display = "block";
+    }
+    </script>
+  </div>  
+</link>
+{% endblock content %}
