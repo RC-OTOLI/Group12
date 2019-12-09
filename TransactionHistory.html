@@ -7,7 +7,9 @@ Wallet - Transaction History
 
 
 {% block content %}
-<div id = "div3">
+{{super()}}
+
+<div id = "div1">
 
 	<style>
 	.button {
@@ -84,15 +86,12 @@ Wallet - Transaction History
 	{% if noData == true %}
 	<div style="width: auto; height: auto; text-align: center;  padding-top: 20%; background-color: rgba(87, 176, 211, 0.8);">
 		<h1>You have no data!</h1>
-		<a href="{{ url_for('add_trans') }}"><button class ="button button1"><span>Add  </span></button></a>
-
-		
 	</div>
 	<!-- chart can't generate if there is no data -->
 	{% else %}
 	<h1 style="text-align: center;">Transaction History</h1>
-	<h2 style = "text-align: center;">Max Budget: ${{budget}}</h2>
-	<table style="table-layout: auto; width: 80%; font-size: x-large;">
+	<h2 style = "text-align: center;" method = "GET">Max Budget: {{ budget }}</h2>
+	<table style="table-layout: auto; width: 80%; font-size: x-large;" method = "GET">
 		<colgroup>
 			<col>
 			<col>
@@ -110,9 +109,15 @@ Wallet - Transaction History
 			
 		</tr>
 
-		
-		
-	
+		{%for d in range(0,len) %}
+		<tr style="background-color: WhiteSmoke;">
+			<td><input type = "checkbox"></td>
+			<td>{{lbls[d]}}</td>
+			<td>{{description[d]}}</td>
+			<td>{{ amts[d] }}</td>
+			
+		</tr>
+		{%endfor%}
 	</table>
 	<a href="{{ url_for('add_trans') }}"><button class ="button button1"><span>Add  </span></button></a>
 
