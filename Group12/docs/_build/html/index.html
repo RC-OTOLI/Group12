@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Welcome to Wallet’s documentation! &#8212; Wallet 12/9 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app.__init__">
+<span id="welcome-to-wallet-s-documentation"></span><h1>Welcome to Wallet’s documentation!<a class="headerlink" href="#module-app.__init__" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-app.routes"></span><span class="target" id="module-app.models"></span><dl class="class">
+<dt id="app.models.Transaction">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">Transaction</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.models.Transaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores data for all transactions, .</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.User">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">User</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.models.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores data for all fields.</p>
+<dl class="method">
+<dt id="app.models.User.check_password">
+<code class="sig-name descname">check_password</code><span class="sig-paren">(</span><em class="sig-param">password</em><span class="sig-paren">)</span><a class="headerlink" href="#app.models.User.check_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify password is identical</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>password</strong> – String assigned to password of account</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.User.full_detail">
+<code class="sig-name descname">full_detail</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.models.User.full_detail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash for User</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.User.get_max_budget">
+<code class="sig-name descname">get_max_budget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.models.User.get_max_budget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Max Budget</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.User.set_max_budget">
+<code class="sig-name descname">set_max_budget</code><span class="sig-paren">(</span><em class="sig-param">max_budget</em><span class="sig-paren">)</span><a class="headerlink" href="#app.models.User.set_max_budget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set Max Budget for personal transaction threshold</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_budget</strong> – Float assigned to personal threshold</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.models.User.set_password">
+<code class="sig-name descname">set_password</code><span class="sig-paren">(</span><em class="sig-param">password</em><span class="sig-paren">)</span><a class="headerlink" href="#app.models.User.set_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set hash when creating new password</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>password</strong> – String assigned to password of account</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-app.forms"></span><dl class="class">
+<dt id="app.forms.AddForm">
+<em class="property">class </em><code class="sig-prename descclassname">app.forms.</code><code class="sig-name descname">AddForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.AddForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add Form when adding to transaction.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.forms.DeleteForm">
+<em class="property">class </em><code class="sig-prename descclassname">app.forms.</code><code class="sig-name descname">DeleteForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.DeleteForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete Form when deleting from transaction.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.forms.LoginForm">
+<em class="property">class </em><code class="sig-prename descclassname">app.forms.</code><code class="sig-name descname">LoginForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.LoginForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login Form for Wallet.</p>
+<dl class="method">
+<dt id="app.forms.LoginForm.validate_username">
+<code class="sig-name descname">validate_username</code><span class="sig-paren">(</span><em class="sig-param">username</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.LoginForm.validate_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify Username is in database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> – String assigned to name of person</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.forms.MaxBudgetForm">
+<em class="property">class </em><code class="sig-prename descclassname">app.forms.</code><code class="sig-name descname">MaxBudgetForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.MaxBudgetForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set Maximum Budget for Wallet threshhold</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.forms.MultiCheckboxField">
+<em class="property">class </em><code class="sig-prename descclassname">app.forms.</code><code class="sig-name descname">MultiCheckboxField</code><span class="sig-paren">(</span><em class="sig-param">label=None</em>, <em class="sig-param">validators=None</em>, <em class="sig-param">coerce=&lt;class 'str'&gt;</em>, <em class="sig-param">choices=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.MultiCheckboxField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checkbox for Delete Form</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.forms.RegisterForm">
+<em class="property">class </em><code class="sig-prename descclassname">app.forms.</code><code class="sig-name descname">RegisterForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.RegisterForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register Form for Wallet</p>
+<dl class="method">
+<dt id="app.forms.RegisterForm.validate_email">
+<code class="sig-name descname">validate_email</code><span class="sig-paren">(</span><em class="sig-param">email</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.RegisterForm.validate_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify Email if isn’t taken</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> – String assigned to name of person</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="app.forms.RegisterForm.validate_username">
+<code class="sig-name descname">validate_username</code><span class="sig-paren">(</span><em class="sig-param">username</em><span class="sig-paren">)</span><a class="headerlink" href="#app.forms.RegisterForm.validate_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify Username if isn’t taken</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> – String assigned to name of person</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Wallet</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Team 12.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'layout.html'  %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Add Transaction
+{% endblock title %}
+
+{% block content %}
+<div style="padding-top: 50px; text-align: center"><h1>Add Transaction</h1></div>
+<div id="add" class="container">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.description) }}
+        {{ wtf.form_field(form.amount) }}
+        <button class="btn btn-sm btn-primary" type="submit" style="background-color: gray;">Submit</button>
+    </form>
+</div>
+{% endblock content %}
