@@ -60,7 +60,7 @@ def transaction_history():
         try: 
             json.dumps(x)
         except:
-            return render_template('TransactionHistory.html', noData=True)
+            return render_template('TransactionHistory.html')
 
 
     is_jsonable(budget)
@@ -70,7 +70,7 @@ def transaction_history():
         is_jsonable(amounts[0])
     except:
         flash('no data')
-        return render_template('TransactionHistory.html', noData=True)
+        return render_template('TransactionHistory.html')
 
     
    
