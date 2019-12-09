@@ -1,0 +1,128 @@
+{% extends 'layout.html'  %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Wallet - Transaction History
+{% endblock title %}
+
+
+{% block content %}
+{{super()}}
+
+<div id = "div1">
+
+	<style>
+	.button {
+		background-color: #4CAF50; /* Green */
+		border-radius: 5px;
+		border: none;
+		color: white;
+		padding: 12px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px;
+		width: 120px;
+		cursor: pointer;
+		transition: all 0.5s;
+	}
+
+	.button:hover{
+		color: white;
+		text-decoration: none;
+	}
+
+	.button span {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		transition: 0.5s;
+	}
+
+	.button span:after {
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		right: -20px;
+		transition: 0.5s;
+	}
+
+	.button1 span:after {
+		content: '\ff0b';
+	}
+
+	.button2 span:after {
+		content: '\ff0d';
+	}
+
+	.button:hover span {
+  		padding-right: 25px;
+	}
+
+	.button:hover span:after {
+		opacity: 1;
+		right: 0;
+	}
+
+	.button1{
+		background-color: rgb(11, 142, 11);
+	}
+
+	.button1:hover{
+		background-color: rgb(30, 150, 30);
+	}
+
+	.button2{
+		background-color: red;
+	}
+
+	.button2:hover{
+		background-color: rgb(193, 35, 35);
+	}
+	</style>
+
+	<center>
+	{% if noData == true %}
+	<div style="width: auto; height: auto; text-align: center;  padding-top: 20%; background-color: rgba(87, 176, 211, 0.8);">
+		<h1>You have no data!</h1>
+	</div>
+	<!-- chart can't generate if there is no data -->
+	{% else %}
+	<h1 style="text-align: center;">Transaction History</h1>
+	<h2 style = "text-align: center;" method = "GET">Max Budget: {{ budget }}</h2>
+	<table style="table-layout: auto; width: 80%; font-size: x-large;" method = "GET">
+		<colgroup>
+			<col>
+			<col>
+			<col>
+			<col>
+			<col style="text-align: right;">
+		</colgroup>
+		
+
+		<tr style="font-weight: bolder;">
+			<td>Select</td>
+			<td>Date</td>
+			<td>Description</td>
+			<td>Amount</td>
+			
+		</tr>
+
+		{%for d in range(0,len) %}
+		<tr style="background-color: WhiteSmoke;">
+			<td><input type = "checkbox"></td>
+			<td>{{lbls[d]}}</td>
+			<td>{{description[d]}}</td>
+			<td>{{ amts[d] }}</td>
+			
+		</tr>
+		{%endfor%}
+	</table>
+	<a href="{{ url_for('add_trans') }}"><button class ="button button1"><span>Add  </span></button></a>
+
+	<button class = "button button2" type="submit" href="#"><span>Delete  </span></button>
+	{% endif %}
+	</center>
+</div>
+{% endblock content %}
