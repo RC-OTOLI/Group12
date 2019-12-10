@@ -7,6 +7,8 @@ for a demo, sign in wtih <br>
 username: admin <br>
 password: admin
 
+Sphinx Documentation index is in folder docs/_build/html/index.html
+
 # Credits
 
 Wallet includes works distributed under the licenses listed below. The full text for most of the licenses listed below can be found in the LICENSE.txt file accompanying each work. The original copyright notices have been preserved within the respective files and or packages. Please refer to the specific files and/or packages for more detailed information about the authors, copyright notices, and licenses.
