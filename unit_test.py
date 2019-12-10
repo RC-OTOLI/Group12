@@ -1,6 +1,5 @@
 import pytest
 import tempfile, os
-from app import app
 from app import makeApp
 from app.models import User,Transaction
 
