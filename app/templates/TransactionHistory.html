@@ -110,21 +110,15 @@ Wallet - Transaction History
 			
 		</tr>
 
+		{% for i in range(0,lbls|length) %}
 		<tr >
 			
-			<td>12/01/19</td>
-			<td>Walmart</td>
-			<td>$1200</td>
+			<td>{{lbls[i]}}</td>
+			<td>{{description[i]}}</td>
+			<td>${{amts[i]}}</td>
 			
 		</tr>
-		<tr >
-			
-			<td>12/03/19</td>
-			<td>Rent</td>
-			<td>$1800</td>
-			
-		</tr>
-		
+		{%endfor%}
 	
 	</table>
 	<a href="{{ url_for('add_trans') }}"><button class ="button button1"><span>Add  </span></button></a>
