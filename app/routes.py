@@ -47,6 +47,36 @@ def delete_account():
 def transaction_history():
     user = User.query.filter_by(id=current_user.id).first()
     budget = user.max_budget
+    transactions = Transaction.query.filter_by(user_id=current_user.id)
+
+    # data for the chart
+    amounts = []
+    labels = []
+    description= []
+    for t in transactions:
+        labels.append(t.timestamp)
+        description.append(t.description)
+       
+        amounts.append(t.amount)
+
+    def is_jsonable(x):
+        try: 
+            json.dumps(x)
+        except:
+            return render_template('TransactionHistory.html', noData=True)
+
+
+    is_jsonable(budget)
+    is_jsonable(amounts)
+    is_jsonable(labels)
+    try: 
+        is_jsonable(amounts[0])
+    except:
+        flash('no data')
+        return render_template('TransactionHistory.html', noData=True)
+    return render_template('TransactionHistory.html',len = len(amounts), amts=amounts, noData= False, lbls=labels, budget=budget, description = description)
+
+
     return render_template('TransactionHistory.html',budget=budget)
 
 """Login for User HTML"""
